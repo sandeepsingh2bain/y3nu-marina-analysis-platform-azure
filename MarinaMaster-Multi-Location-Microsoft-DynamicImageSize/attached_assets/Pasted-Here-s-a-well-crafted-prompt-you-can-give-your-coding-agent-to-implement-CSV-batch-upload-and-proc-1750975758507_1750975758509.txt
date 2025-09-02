@@ -1,0 +1,122 @@
+Here’s a well-crafted prompt you can give your coding agent to implement **CSV batch upload and processing for multiple AOIs** in your **satellite imagery analysis app**. The implementation includes updates to both the **UI and backend logic**:
+
+---
+
+## 💬 Prompt for Coding Agent
+
+### ✳️ Objective:
+
+Enhance the app to support **batch processing** of Areas of Interest (AOIs) by uploading a **CSV file** containing multiple triplets of:
+
+* Polygon coordinates
+* Record ID
+* Formatted Address
+
+Each AOI entry from the CSV should be processed **sequentially**, using the existing satellite imagery and detection pipeline.
+
+---
+
+### 🧩 CSV Format:
+
+Ensure the uploaded CSV contains the following **three columns**:
+
+* `polygon` (JSON array of lat/lng pairs)
+* `record_id` (string)
+* `formatted_address` (string)
+
+Example:
+
+```json
+polygon: [{"lat":41.5519, "lng":-70.6018}, {"lat":41.5520, "lng":-70.6010}, ...]
+record_id: AOI123
+formatted_address: 123 Marina Blvd, MA
+```
+
+---
+
+## 🧱 UI Enhancements
+
+### 1. **CSV Upload Panel**
+
+Add a new section below or next to the current `AOI Polygon` input:
+
+```jsx
+<Card title="Batch Upload AOIs via CSV">
+  <Input type="file" accept=".csv" onChange={handleCSVUpload} />
+  <Button onClick={startBatchProcessing}>Start Batch Analysis</Button>
+</Card>
+```
+
+### 2. **Progress Tracking Panel**
+
+Create a UI to show progress of batch processing:
+
+* List of areas from the CSV
+* Current status (Pending, Processing, Done, Failed)
+
+```jsx
+<Table>
+  <thead>
+    <tr>
+      <th>Record ID</th>
+      <th>Formatted Address</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {batchStatus.map(entry => (
+      <tr key={entry.record_id}>
+        <td>{entry.record_id}</td>
+        <td>{entry.formatted_address}</td>
+        <td>{entry.status}</td>
+      </tr>
+    ))}
+  </tbody>
+</Table>
+```
+
+---
+
+## ⚙️ Backend / Logic Changes
+
+### 1. **CSV Parser**
+
+Use `PapaParse` (for JS) or equivalent to parse the CSV and validate each row.
+
+### 2. **Queue Runner**
+
+Implement a **batch processing queue** to:
+
+* Take each polygon one at a time
+* Load satellite tile
+* Run detection
+* Store/record results (could reuse or extend existing state/data structures)
+
+```js
+async function startBatchProcessing() {
+  for (const area of parsedCSVData) {
+    try {
+      setStatus(area.record_id, "Processing");
+      await loadMap(area.polygon);
+      const results = await runDetection();
+      saveResults(area.record_id, results);
+      setStatus(area.record_id, "Done");
+    } catch (err) {
+      setStatus(area.record_id, "Failed");
+    }
+  }
+}
+```
+
+---
+
+## 📝 Additional Tips
+
+* Disable map UI while batch is running to avoid race conditions.
+* Optionally allow downloading results (CSV/JSON) after processing.
+* Add a "Pause/Cancel" button for longer runs.
+* Show visual toast/success notifications when batch completes.
+
+---
+
+Would you like me to generate sample React/JSX components, backend logic, or a CSV template for you as well?

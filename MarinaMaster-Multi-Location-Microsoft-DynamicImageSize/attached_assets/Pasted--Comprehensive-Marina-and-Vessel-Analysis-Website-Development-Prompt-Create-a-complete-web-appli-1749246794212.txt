@@ -1,0 +1,146 @@
+# Comprehensive Marina and Vessel Analysis Website - Development Prompt
+
+Create a complete web application for marina slip and vessel analysis using satellite/aerial imagery. The application should be fully functional, production-ready, and self-contained.
+
+## Core Functionality Requirements
+
+### 1. User Interface Components
+- **Input Section:**
+  - Two coordinate input fields for bounding box (top-left lat/lng, bottom-right lat/lng)
+  - Zoom level selector (dropdown: 16-20)
+  - Area validation with 20-tile limit enforcement
+  - "Analyze Area" button with loading states
+
+- **Display Section:**
+  - Large canvas/container for tiled map display
+  - Interactive overlay for detection annotations
+  - Toggle switches for showing/hiding boats vs empty slips
+  - Zoom and pan controls for detailed inspection
+
+- **Results Section:**
+  - Tabular data display with sortable columns
+  - Summary statistics dashboard
+  - Export functionality (CSV, JSON)
+
+### 2. Backend Processing Requirements
+- **Google Static Maps Integration:**
+  - Calculate required tiles from lat/lng bounds and zoom level
+  - Fetch and stitch map tiles seamlessly
+  - Handle API rate limits and errors gracefully
+  - Tile limit validation (max 20 tiles)
+
+- **Computer Vision Pipeline:**
+  - Boat/vessel detection with bounding boxes
+  - Empty marina slip detection and boundary identification
+  - Length/width measurement using map scale calculations
+  - Confidence scoring for all detections
+
+- **Data Processing:**
+  - Convert pixel measurements to real-world distances
+  - Classification of detected objects (boat types, slip types)
+  - Occupancy analysis (occupied vs empty slips)
+  - Size matching analysis (boat fit within slips)
+
+### 3. Detection Categories and Measurements
+
+**Boats/Vessels:**
+- Automatic length and width measurement in meters
+- Orientation/heading calculation
+- Type classification (sailboat, motorboat, yacht)
+- Position coordinates (lat/lng)
+
+**Marina Wet Slips:**
+- Empty slip detection and boundary marking
+- Slip dimensions (length x width)
+- Slip type identification (finger pier, side-tie)
+- Occupancy status determination
+
+**Analytics:**
+- Occupancy rate calculations
+- Size compatibility analysis
+- Density metrics per area
+- Capacity utilization statistics
+
+### 4. Results Table Structure
+Create a comprehensive data table with these columns:
+- Object ID (auto-generated)
+- Object Type (Boat, Empty Slip, Occupied Slip)
+- Coordinates (lat/lng)
+- Dimensions (Length x Width in meters)
+- Area (square meters)
+- Status (for slips: Empty/Occupied; for boats: classification)
+- Confidence Score (0-100%)
+- Notes/Manual Override field
+
+### 5. Technical Implementation Details
+
+**Frontend Technologies:**
+- Modern HTML5/CSS3/JavaScript
+- Responsive design for desktop and tablet use
+- Canvas or WebGL for map rendering and annotations
+- Interactive data tables with sorting/filtering
+- Real-time progress indicators
+
+**Backend Requirements:**
+- RESTful API architecture
+- Google Static Maps API integration
+- Computer vision processing (use YOLO, Detectron2, or cloud vision APIs)
+- Image processing libraries for stitching and analysis
+- Database for storing analysis results (optional)
+
+**Key Algorithms Needed:**
+- Coordinate system conversion (lat/lng to pixel coordinates)
+- Image stitching for seamless tile combination
+- Object detection and classification
+- Geometric measurement calculations
+- Boundary detection for marina infrastructure
+
+### 6. Error Handling and Validation
+- Coordinate input validation
+- API quota/rate limit management
+- Area size validation (20-tile maximum)
+- Detection confidence thresholds
+- Graceful degradation for failed API calls
+
+### 7. User Experience Features
+- **Interactive Map:**
+  - Click on table rows to highlight objects on map
+  - Hover effects for better object identification
+  - Zoom controls for detailed inspection
+
+- **Data Management:**
+  - Export results to CSV/Excel format
+  - Manual correction capabilities for measurements
+  - Bulk operations for managing detections
+  - Save/load analysis sessions
+
+- **Summary Dashboard:**
+  - Total counts and statistics
+  - Occupancy rate visualization
+  - Size distribution charts
+  - Performance metrics display
+
+### 8. Configuration Options
+- Adjustable confidence thresholds for detection
+- Minimum/maximum size filters for objects
+- Toggle between metric and imperial units
+- Customizable detection sensitivity settings
+
+## Implementation Notes
+- Ensure all API keys are configurable via environment variables
+- Implement proper error messages and user feedback
+- Add loading states and progress indicators for long operations
+- Make the interface intuitive for non-technical marina operators
+- Include sample coordinates for testing/demonstration
+- Optimize for performance with large imagery datasets
+- Consider offline capability for processed results
+
+## Deliverables Expected
+1. Complete working web application
+2. Clean, documented code structure
+3. User guide/documentation
+4. API key setup instructions
+5. Deployment-ready configuration
+6. Sample test cases with known marina locations
+
+Build this as a professional-grade tool suitable for marina operators, harbor masters, and marine facility managers. Focus on accuracy, usability, and practical real-world application.
