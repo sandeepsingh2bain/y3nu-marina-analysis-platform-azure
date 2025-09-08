@@ -1,0 +1,23 @@
+{
+  "recordId": "2NEW",
+  "formattedAddress": "101 Cay Plz a, Savannah, GA 31401, USA",
+  "topLeftLat": 32.08511982651064,
+  "topLeftLng": -81.08461618423463,
+  "bottomRightLat": 32.08238820685833,
+  "bottomRightLng": -81.08351647853853,
+  "zoomLevel": 19,
+  "detections": [],
+  "stats": {
+    "totalVessels": 0,
+    "vesselTypes": {
+      "small": 0,
+      "medium": 0,
+      "large": 0
+    },
+    "avgConfidence": 0,
+    "processingTime": "2.8s",
+    "tileCount": 15
+  },
+  "cachedAt": "2025-09-08T15:20:32.658Z",
+  "expiresAt": "2025-10-08T15:20:32.658Z"
+}
