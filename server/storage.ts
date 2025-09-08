@@ -11,6 +11,7 @@ export interface IStorage {
 
   createAnalysisRequest(request: InsertAnalysisRequest): Promise<AnalysisRequest>;
   getAnalysisRequest(id: number): Promise<AnalysisRequest | undefined>;
+  getAnalysisRequestsByRecordId(recordId: string): Promise<AnalysisRequest[]>;
   updateAnalysisStatus(id: number, status: string, completedAt?: Date): Promise<void>;
   updateAnalysisMapData(id: number, mapImageUrl: string, tileUrls: string[], wasFromCache?: boolean): Promise<void>;
   updateAnalysisAnnotatedImages(id: number, annotatedImagePaths: string[]): Promise<void>;
@@ -137,6 +138,10 @@ export class MemStorage implements IStorage {
 
   async getAnalysisRequest(id: number): Promise<AnalysisRequest | undefined> {
     return this.analysisRequests.get(id);
+  }
+
+  async getAnalysisRequestsByRecordId(recordId: string): Promise<AnalysisRequest[]> {
+    return Array.from(this.analysisRequests.values()).filter(request => request.recordId === recordId);
   }
 
   async updateAnalysisStatus(id: number, status: string, completedAt?: Date): Promise<void> {
@@ -423,6 +428,10 @@ export class DatabaseStorage implements IStorage {
   async getAnalysisRequest(id: number): Promise<AnalysisRequest | undefined> {
     const [request] = await db.select().from(analysisRequests).where(eq(analysisRequests.id, id));
     return request || undefined;
+  }
+
+  async getAnalysisRequestsByRecordId(recordId: string): Promise<AnalysisRequest[]> {
+    return await db.select().from(analysisRequests).where(eq(analysisRequests.recordId, recordId));
   }
 
   async updateAnalysisStatus(id: number, status: string, completedAt?: Date): Promise<void> {

@@ -1810,6 +1810,71 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Clear cache for specific AOIs
+  app.post("/api/cache/clear-aois", async (req, res) => {
+    try {
+      const { recordIds } = req.body;
+      
+      if (!Array.isArray(recordIds) || recordIds.length === 0) {
+        return res.status(400).json({ message: "recordIds array is required" });
+      }
+
+      console.log(`Clearing cache for AOIs: ${recordIds.join(', ')}`);
+      
+      const results = [];
+      
+      for (const recordId of recordIds) {
+        // Get all analysis requests for this record ID
+        const analysisRequests = await storage.getAnalysisRequestsByRecordId(recordId);
+        
+        if (analysisRequests.length === 0) {
+          results.push({ recordId, status: "no_analysis_found", cleared: 0 });
+          continue;
+        }
+
+        let clearedCount = 0;
+        
+        for (const analysis of analysisRequests) {
+          if (analysis.recordId && analysis.formattedAddress) {
+            const cacheCleared = analysisCache.clearSpecific(
+              analysis.recordId,
+              analysis.formattedAddress,
+              analysis.topLeftLat,
+              analysis.topLeftLng,
+              analysis.bottomRightLat,
+              analysis.bottomRightLng,
+              analysis.zoomLevel
+            );
+            
+            if (cacheCleared) {
+              clearedCount++;
+              console.log(`Cleared analysis cache for ${analysis.recordId} (ID: ${analysis.id})`);
+            }
+          }
+        }
+        
+        results.push({ 
+          recordId, 
+          status: "cleared", 
+          cleared: clearedCount,
+          total: analysisRequests.length 
+        });
+      }
+      
+      res.json({
+        message: `Cache clearing completed for ${recordIds.length} AOIs`,
+        results
+      });
+      
+    } catch (error) {
+      console.error("Failed to clear AOI caches:", error);
+      res.status(500).json({ 
+        message: "Failed to clear AOI caches", 
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  });
+
   // Clear all system data and cache
   app.post("/api/system/clear-all", async (req, res) => {
     try {
