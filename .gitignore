@@ -1,6 +1,111 @@
-node_modules
-dist
+# Environment Variables & Secrets
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*.local
+*.env
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build Output
+dist/
+build/
+.next/
+out/
+
+# Cache Directories
+server/static/cached_analysis/
+server/static/cached_tiles/
+server/static/tiles/
+server/static/annotated/
+server/static/visualizations/
+.cache/
+.temp/
+.tmp/
+
+# Python Cache Files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Log Files
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
 .DS_Store
-server/public
+Thumbs.db
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.project
+.classpath
+.settings/
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Vite
 vite.config.ts.*
+*.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded Files
+uploads/
+attached_assets/
+
+# Coverage Reports
+coverage/
+*.lcov
+.nyc_output/
+
+# Production
+server/public
 *.tar.gz
+*.zip
+
+# Misc
+*.pem
+*.key
+*.cert
+.eslintcache
