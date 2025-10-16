@@ -1,0 +1,24 @@
+Marina Analysis Platform (Google) - Screenshot Filenames
+==========================================================
+
+Place these 17 PNG images in the imgs/ folder:
+
+01-main-interface.png
+02-aoi-polygon-input.png
+03-zoom-level.png
+04-load-maps.png
+05-satellite-tiles.png
+06-run-detection.png
+07-detection-progress.png
+08-annotated-results.png
+09-detection-stats.png
+10-export-results.png
+11-batch-upload.png
+12-batch-settings.png
+13-batch-processing.png
+14-spatial-filtering.png
+15-deduplication.png
+16-file-browser.png
+17-system-cleanup.png
+
+See IMAGE_LIST.md for detailed capture instructions.

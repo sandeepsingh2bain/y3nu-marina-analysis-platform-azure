@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marina Analysis Platform User Guide - Google Maps</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .page-break { page-break-before: always; }
+            nav { display: none; }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .cover-page {
+            text-align: center;
+            padding: 60px 0 40px 0;
+            background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);
+            color: white;
+            border-radius: 12px;
+            margin: -40px -40px 40px -40px;
+        }
+
+        .cover-page h1 {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .cover-page p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 0;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        nav h3 {
+            color: white;
+            margin: 0 0 20px 0;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            white-space: nowrap;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #4285F4;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #34A853;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            color: #FBBC04;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-left: 4px solid #4285F4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #4285F4;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .screenshot {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .screenshot-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #4285F4;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background-color: #fff4e5;
+            border-left: 4px solid #FBBC04;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background-color: #e6f4ea;
+            border-left: 4px solid #34A853;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .error-box {
+            background-color: #fce8e6;
+            border-left: 4px solid #EA4335;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 40px 0;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .badge-primary {
+            background-color: #4285F4;
+            color: white;
+        }
+
+        .badge-success {
+            background-color: #34A853;
+            color: white;
+        }
+
+        .badge-warning {
+            background-color: #FBBC04;
+            color: white;
+        }
+
+        .badge-danger {
+            background-color: #EA4335;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cover-page">
+            <h1>Marina Analysis Platform User Guide</h1>
+            <p>Google Maps - AI-Powered Boat Detection & Analysis</p>
+        </div>
+
+        <nav>
+            <h3>Quick Navigation</h3>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#single-analysis">Single Analysis</a></li>
+                <li><a href="#batch-processing">Batch Processing</a></li>
+                <li><a href="#detection-results">Detection Results</a></li>
+                <li><a href="#export">Export & Analysis</a></li>
+                <li><a href="#tips">Tips & Best Practices</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+            </ul>
+        </nav>
+
+        <h2 id="overview">Overview</h2>
+
+        <p><strong>Marina Analysis Platform (Google Maps)</strong> is a comprehensive web-based application that combines Google Maps satellite imagery with AI-powered computer vision to detect and analyze boats in marina areas.</p>
+
+        <div class="success-box">
+            <h3>Key Features</h3>
+            <ul>
+                <li>✅ <strong>Google Maps Integration</strong> - High-resolution satellite imagery</li>
+                <li>✅ <strong>AI-Powered Detection</strong> - Vision Agent with OwlV2</li>
+                <li>✅ <strong>Polygon AOI Support</strong> - Custom area definition</li>
+                <li>✅ <strong>Spatial Filtering</strong> - 70%+ inside AOI</li>
+                <li>✅ <strong>Smart Deduplication</strong> - 70% overlap threshold</li>
+                <li>✅ <strong>Batch Processing</strong> - Multiple marinas from CSV</li>
+                <li>✅ <strong>Real-time Progress</strong> - Live detection updates</li>
+                <li>✅ <strong>Excel Export</strong> - Detailed boat measurements</li>
+            </ul>
+        </div>
+
+        <h3>Purpose</h3>
+        <p>Marina Analysis Platform is <strong>Phase 2</strong> of the marina analysis workflow. Use it to:</p>
+        <ol>
+            <li>Load satellite imagery for defined marina areas</li>
+            <li>Run AI detection to identify boats</li>
+            <li>Apply spatial filtering to remove out-of-bounds detections</li>
+            <li>Deduplicate overlapping detections</li>
+            <li>Export filtered results for verification</li>
+        </ol>
+
+        <hr>
+
+        <h2 id="getting-started">Getting Started</h2>
+
+        <h3>Initial Screen</h3>
+        <img src="imgs/01-main-interface.png" alt="Main Interface" class="screenshot">
+        <p class="screenshot-caption">Main interface with navigation tabs</p>
+
+        <p><strong>Main Navigation:</strong></p>
+        <ul>
+            <li><strong>Single Analysis</strong> - Analyze individual marinas</li>
+            <li><strong>Batch Processing</strong> - Process multiple marinas from CSV</li>
+            <li><strong>File System</strong> - Browse generated files</li>
+            <li><strong>System Cleanup</strong> - Clear all data</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="single-analysis">Single Marina Analysis Workflow</h2>
+
+        <h3>Step 1: Define Area of Interest</h3>
+
+        <img src="imgs/02-aoi-polygon-input.png" alt="AOI Polygon Input" class="screenshot">
+        <p class="screenshot-caption">Paste polygon coordinates for marina area</p>
+
+        <div class="info-box">
+            <strong>Sample File:</strong> <code>sample_data/6147-addresses_export-AOI-Capture-download.csv</code>
+        </div>
+
+        <p><strong>How to Get Polygon Coordinates:</strong></p>
+        <ol>
+            <li>Open <code>6147-addresses_export-AOI-Capture-download.csv</code> in a text editor</li>
+            <li>Find the <strong>"Polygon Coordinates"</strong> column (column G)</li>
+            <li>Copy the entire JSON array</li>
+            <li>Paste into the <strong>"AOI Polygon"</strong> text area in the platform</li>
+        </ol>
+
+        <p><strong>Example - RecordID 6147 (Annapolis Marina):</strong></p>
+        <ul>
+            <li><strong>Address:</strong> 410 Severn Avenue, Annapolis, MD 21403</li>
+            <li><strong>RecordID:</strong> 6147</li>
+        </ul>
+
+        <p><strong>Polygon Format:</strong></p>
+        <pre><code>[{"lat":38.97220835300037,"lng":-76.48325928004924},{"lat":38.97275095846031,"lng":-76.48386017213753}, ...]</code></pre>
+
+        <div class="info-box">
+            <strong>Source:</strong> Polygon coordinates come from <strong>GeoCapture (AOI Capture)</strong> application export.
+        </div>
+
+        <h3>Step 2: Load Satellite Maps</h3>
+
+        <img src="imgs/04-load-maps.png" alt="Load Maps Button" class="screenshot">
+        <p class="screenshot-caption">Click the "Load Maps" button to load satellite imagery for the pasted polygon coordinates</p>
+
+        <p><strong>Action:</strong> Click the <strong>"Load Maps"</strong> button to load satellite imagery for the pasted polygon coordinates.</p>
+
+        <p>System automatically:</p>
+        <ul>
+            <li>Calculates optimal tile grid (25% overlap)</li>
+            <li>Fetches tiles from Google Static Maps API</li>
+            <li>Stores with 24-hour cache</li>
+            <li>Displays tile grid in the interface</li>
+        </ul>
+
+        <img src="imgs/05-satellite-tiles.png" alt="Satellite Tiles" class="screenshot">
+        <p class="screenshot-caption">After loading: prediction side is empty, showing overlapping tiles with adaptive coverage</p>
+
+        <p>After loading, the <strong>prediction side will be empty</strong> (no detections yet), but you'll see a <strong>group of overlapping image tiles</strong>. The system uses <strong>adaptive logic</strong> to calculate the optimal number and arrangement of tiles needed to cover the entire polygon area.</p>
+
+        <p><strong>What You'll See:</strong></p>
+        <ul>
+            <li><strong>Tile grid</strong> showing all fetched satellite images</li>
+            <li><strong>Overlapping tiles</strong> (25% overlap between adjacent tiles)</li>
+            <li><strong>Tile numbers</strong> for reference (e.g., Tile 0, Tile 1, Tile 2, etc.)</li>
+            <li><strong>Input images</strong> on the left (original satellite tiles)</li>
+            <li><strong>Empty prediction area</strong> on the right (will show annotated results after detection)</li>
+        </ul>
+
+        <h3>Step 3: Run Boat Detection</h3>
+
+        <img src="imgs/06-run-detection.png" alt="Run Detection" class="screenshot">
+        <p class="screenshot-caption">Click "Run Detection" button - choose single image or all images</p>
+
+        <p><strong>Action:</strong> Click the <strong>"Run Detection"</strong> button to trigger boat detection. You have two options:</p>
+
+        <ol>
+            <li><strong>Run Detection on Single Image</strong>: Process only the currently selected tile
+                <ul>
+                    <li>Use this to test/preview detection on one tile</li>
+                    <li>Faster for quick checks</li>
+                    <li>Results shown for selected tile only</li>
+                </ul>
+            </li>
+            <li><strong>Run Detection on All Images</strong>: Process all loaded tiles
+                <ul>
+                    <li>Use this for complete marina analysis</li>
+                    <li>Processes each tile sequentially</li>
+                    <li>Recommended for final results</li>
+                </ul>
+            </li>
+        </ol>
+
+        <img src="imgs/07-detection-progress.png" alt="Detection Progress" class="screenshot">
+        <p class="screenshot-caption">Real-time display: input tile on left, annotated prediction on right</p>
+
+        <p><strong>Real-Time Display:</strong></p>
+        <p>As detection runs, you'll see results appear with:</p>
+        <ul>
+            <li><strong>Input tile on the left</strong>: Original satellite image</li>
+            <li><strong>Annotated prediction on the right</strong>: Same image with green bounding boxes around detected boats</li>
+            <li><strong>Boat dimensions</strong>: Length and width displayed on each detection</li>
+            <li><strong>Tile-by-tile processing</strong>: Results appear as each tile completes</li>
+        </ul>
+
+        <h3>Step 4: Review Results</h3>
+
+        <img src="imgs/08-annotated-results.png" alt="Annotated Results" class="screenshot">
+        <p class="screenshot-caption">Detection results with green bounding boxes</p>
+
+        <div style="display: flex; align-items: flex-start; gap: 20px; margin: 20px 0;">
+            <div style="flex: 0 0 48%;">
+                <img src="imgs/09-detection-stats.png" alt="Detection Statistics" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p class="screenshot-caption">Statistics showing filtering and deduplication</p>
+            </div>
+            <div style="flex: 1;">
+                <h4>Statistics Panel Overview</h4>
+                <p>The detection statistics panel displays the complete analysis pipeline, showing how raw detections are filtered and deduplicated to produce final results.</p>
+
+                <p><strong>Key Metrics Displayed:</strong></p>
+                <ul>
+                    <li><strong>Total Raw Detections</strong>: All boats found across all tiles (includes duplicates and out-of-bounds detections)</li>
+                    <li><strong>AOI Filtered</strong>: Boats with 70%+ of their bounding box inside the polygon boundary</li>
+                    <li><strong>After Deduplication</strong>: Final unique boats after removing duplicates in overlapping tile areas (70% overlap threshold)</li>
+                    <li><strong>Processing Time</strong>: Total time taken for detection and filtering</li>
+                    <li><strong>Tiles Processed</strong>: Number of satellite tiles analyzed</li>
+                </ul>
+
+                <p><strong>Understanding the Numbers:</strong></p>
+                <p>The statistics show the reduction at each stage:</p>
+                <ol>
+                    <li><strong>Raw detections</strong> include all AI predictions across tiles</li>
+                    <li><strong>AOI filtering</strong> removes boats outside marina boundaries</li>
+                    <li><strong>Deduplication</strong> removes the same boat detected in multiple overlapping tiles</li>
+                    <li><strong>Final count</strong> represents unique boats within the marina polygon</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <p><strong>Example Results (RecordID 6147 - Annapolis Marina):</strong></p>
+            <ul>
+                <li><strong>Total Raw Detections:</strong> 106 boats (across 2 tiles)</li>
+                <li style="margin-left: 20px;">Tile 0 (tile1): 51 boats</li>
+                <li style="margin-left: 20px;">Tile 7 (tile2): 55 boats</li>
+                <li><strong>AOI Filtered:</strong> ~55 boats (boats inside polygon)</li>
+                <li><strong>After Deduplication:</strong> ~55 boats (final count)</li>
+            </ul>
+            <p><strong>Sample Files:</strong></p>
+            <ul>
+                <li><code>sample_data/6147-boat-detections-tile1-export.csv</code> - 51 detections from Tile 0</li>
+                <li><code>sample_data/6147-boat-detections-tile2-export.csv</code> - 55 detections from Tile 7</li>
+                <li><code>sample_data/6147-Detection-results.xlsx</code> - Final filtered results (~55 boats)</li>
+            </ul>
+        </div>
+
+        <h3>Step 5: Export Filtered Results</h3>
+
+        <img src="imgs/10-export-results.png" alt="Export Results" class="screenshot">
+        <p class="screenshot-caption">Download Excel file with filtered boat data</p>
+
+        <div class="info-box">
+            <strong>Sample Output File:</strong> <code>sample_data/6147-Detection-results.xlsx</code>
+        </div>
+
+        <p><strong>Excel Columns:</strong></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Column</th>
+                    <th>Description</th>
+                    <th>Example (from RecordID 6147)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Type</strong></td>
+                    <td>Boat size classification</td>
+                    <td>medium</td>
+                </tr>
+                <tr>
+                    <td><strong>Latitude</strong></td>
+                    <td>GPS latitude (15 decimals)</td>
+                    <td>38.972417739218200</td>
+                </tr>
+                <tr>
+                    <td><strong>Longitude</strong></td>
+                    <td>GPS longitude (15 decimals)</td>
+                    <td>-76.484367578396000</td>
+                </tr>
+                <tr>
+                    <td><strong>Length (m)</strong></td>
+                    <td>Boat length in meters</td>
+                    <td>18.5</td>
+                </tr>
+                <tr>
+                    <td><strong>Width (m)</strong></td>
+                    <td>Boat width in meters</td>
+                    <td>7.4</td>
+                </tr>
+                <tr>
+                    <td><strong>Polygon Coords</strong></td>
+                    <td>Bounding box coordinates</td>
+                    <td>TL: lat,lng | TR: lat,lng | ...</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2 id="batch-processing">Batch Processing Workflow</h2>
+
+        <h3>Step 1: Prepare CSV File</h3>
+
+        <p>Upload CSV file exported from <strong>GeoCapture</strong> with marina data.</p>
+
+        <div class="info-box">
+            <p><strong>Sample File:</strong> <code>sample_data/6147-addresses_export-AOI-Capture-download.csv</code></p>
+            <p><strong>Required Columns:</strong></p>
+            <ul>
+                <li><strong>RecordID</strong> - Unique marina identifier (alphanumeric, e.g., 6147, MAR-001, ANN-6147) - <strong>MUST BE ADDED MANUALLY</strong></li>
+                <li><strong>Address</strong> - Marina address</li>
+                <li><strong>Geocode Latitude/Longitude</strong> - Center point coordinates</li>
+                <li><strong>Polygon Coordinates</strong> - JSON array of polygon points (required for AOI)</li>
+                <li><strong>Formatted Address</strong> - Google's formatted address</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <p><strong>⚠️ Important Note about RecordID:</strong></p>
+            <p>The <strong>RecordID</strong> column must be <strong>manually added</strong> to the CSV file after exporting from GeoCapture (AOI Capture app). GeoCapture exports do not include RecordID by default.</p>
+            <p><strong>Why Manual Addition is Required:</strong></p>
+            <ul>
+                <li>Many different marinas can have the same RecordID in source data</li>
+                <li>Same marina can appear with different RecordIDs</li>
+                <li>Manual assignment ensures each marina has a unique, traceable identifier</li>
+                <li>RecordID is used in output filenames: <code>[RecordID]-Detection-results.xlsx</code></li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <p><strong>Example Record (RecordID 6147):</strong></p>
+            <ul>
+                <li><strong>Address:</strong> 410 Severn Avenue, Annapolis, MD 21403</li>
+                <li><strong>Coordinates:</strong> 38.97167, -76.48337</li>
+                <li><strong>Expected Output:</strong> <code>6147-Detection-results.xlsx</code> (~55 boats)</li>
+            </ul>
+            <p><strong>Note:</strong> This is the <strong>same file</strong> used for Single Analysis (just paste the polygon coordinates)</p>
+        </div>
+
+        <h3>Step 2: Upload and Process</h3>
+
+        <img src="imgs/11-batch-upload.png" alt="Batch Upload" class="screenshot">
+        <p class="screenshot-caption">Upload CSV file for batch processing</p>
+
+        <img src="imgs/12-batch-settings.png" alt="Batch Settings" class="screenshot">
+        <p class="screenshot-caption">Configure batch processing settings</p>
+
+        <img src="imgs/13-batch-processing.png" alt="Batch Processing" class="screenshot">
+        <p class="screenshot-caption">Monitor progress for multiple marinas</p>
+
+        <hr>
+
+        <h2 id="detection-results">Understanding Detection Results</h2>
+
+        <h3>Spatial Filtering</h3>
+
+        <img src="imgs/14-spatial-filtering.png" alt="Spatial Filtering" class="screenshot">
+        <p class="screenshot-caption">AOI spatial filtering keeps boats 70%+ inside polygon</p>
+
+        <p><strong>How It Works:</strong></p>
+        <ol>
+            <li>Check boat's 4 corner points (bounding box)</li>
+            <li>Use ray-casting for point-in-polygon test</li>
+            <li>Require 3 out of 4 corners (75%) inside AOI</li>
+            <li>Filter out boats not meeting threshold</li>
+        </ol>
+
+        <h3>Deduplication Process</h3>
+
+        <img src="imgs/15-deduplication.png" alt="Deduplication" class="screenshot">
+        <p class="screenshot-caption">Smart deduplication removes overlapping detections</p>
+
+        <p><strong>Process:</strong></p>
+        <ol>
+            <li>Sort by confidence score (highest first)</li>
+            <li>Calculate polygon overlap percentage</li>
+            <li>Remove boats with >70% overlap</li>
+            <li>Preserve only unique detections</li>
+        </ol>
+
+        <hr>
+
+        <h2 id="tips">Tips & Best Practices</h2>
+
+        <h3>Zoom Level Selection</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Zoom</th>
+                    <th>Resolution</th>
+                    <th>Use Case</th>
+                    <th>Speed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>18</td>
+                    <td>~2.39m/pixel</td>
+                    <td>Quick surveys</td>
+                    <td>Fast</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>~1.19m/pixel</td>
+                    <td><strong>Standard (Recommended)</strong></td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>~0.60m/pixel</td>
+                    <td>High detail</td>
+                    <td>Slow</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Batch Processing Tips</h3>
+        <ul>
+            <li><strong>Test First:</strong> Run single marina before batch</li>
+            <li><strong>Group Similar:</strong> Process marinas by region</li>
+            <li><strong>Monitor Progress:</strong> Check for failed analyses</li>
+            <li><strong>Export Regularly:</strong> Download incrementally</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+
+        <h3>Maps Won't Load</h3>
+        <div class="error-box">
+            <p><strong>Solutions:</strong></p>
+            <ul>
+                <li>Verify Google Maps API key is configured</li>
+                <li>Check polygon coordinates are valid JSON</li>
+                <li>Verify internet connectivity</li>
+                <li>Check API quota hasn't been exceeded</li>
+            </ul>
+        </div>
+
+        <h3>Detection Fails</h3>
+        <div class="error-box">
+            <p><strong>Solutions:</strong></p>
+            <ul>
+                <li>Ensure Vision Agent is installed (Python)</li>
+                <li>Check available memory (needs 4GB+ free)</li>
+                <li>Verify satellite tiles loaded successfully</li>
+                <li>First run downloads OwlV2 model (may take time)</li>
+            </ul>
+        </div>
+
+        <h3>No Boats Detected</h3>
+        <div class="warning-box">
+            <p><strong>Possible Causes:</strong></p>
+            <ul>
+                <li>Marina currently has no boats</li>
+                <li>Zoom level too low (increase to 19 or 20)</li>
+                <li>Verify tiles show correct location</li>
+                <li>Try default Newport example to test</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2>Workflow Integration</h2>
+
+        <p>Marina Analysis Platform is <strong>Phase 2</strong> in the complete workflow:</p>
+
+        <ol>
+            <li><strong>Phase 1:</strong> GeoCapture - Draw marina polygons</li>
+            <li><strong>Phase 2:</strong> Marina Analysis Platform - Run AI detection ⬅ <em>You are here</em></li>
+            <li><strong>Phase 3:</strong> Detection Visualizer - Verify results</li>
+        </ol>
+
+        <div class="success-box">
+            <strong>✅ Use Marina Analysis Platform when:</strong>
+            <ul>
+                <li>You need to detect boats in satellite imagery</li>
+                <li>You have marina AOI polygons from GeoCapture</li>
+                <li>You want filtered, deduplicated detection data</li>
+                <li>You need Excel exports for analysis</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="footer">
+            <p><strong>Version:</strong> 1.0</p>
+            <p><strong>Last Updated:</strong> October 2025</p>
+            <p><strong>Application:</strong> Marina Analysis Platform - Google Maps</p>
+            <p><strong>Project:</strong> Y3NU SafeHarbor Final Handover</p>
+        </div>
+
+    </div>
+</body>
+</html>
